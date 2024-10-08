@@ -1,0 +1,97 @@
+#Python Programming Challenges for Customer Service Data Handling
+
+#Task 1: Customer Service Ticket Tracker
+
+
+def menu():
+    print("Welcome!\n1.Open a new service ticket.")
+    print("2.Update the status of an existing ticket.")
+    print("3.Display all tickets or filter by status.")
+
+
+
+service_tickets = {}
+
+menu()
+option = input("Enter your option: ")
+
+
+counter = 0
+def new_ticket(cust_name, issue, status):
+        global counter
+        counter += 1 
+        new_ticket_number = counter
+        new_ticket_id = "Ticket00" + str(new_ticket_number)
+        service_tickets[new_ticket_id] = ({"Customer": cust_name}, {"Issue": issue}, {"Status": status})
+
+def update_ticket():
+    chosen_ticket = input("Choose ticket to update: ").capitalize()
+    if chosen_ticket == "ticket00" + str(counter):
+        if service_tickets.get("Status") == "open":
+                service_tickets.update({"Status": "closed"})
+        elif service_tickets.get("Status") == "closed":
+                service_tickets.update({"Status": "open"})
+        else:
+            chosen_ticket != "ticket00" + str(counter)
+            print("Ticket does not exist. Please select an existing ticket.")
+            
+        
+             
+    
+
+
+
+while option != 0:
+    if option == "1":
+        print("Opening new ticket")
+        cust_name = input("Enter customer name: ").lower()
+        issue = input("Enter issue description: ").lower()
+        status = input("Is ticket open or closed: ").lower()
+        new_ticket(cust_name, issue, status)
+        print(service_tickets)
+        return_menu = input("Type 'quit' to return to menu: ")
+        if return_menu == "quit":
+            menu()
+            option = input("Enter your option: ")  
+        else:
+            continue 
+
+    elif option == "2":
+            print("Option 2 has been chosen.")
+            update_ticket()
+            print(service_tickets)
+            return_menu = input("Type 'quit' to return to menu: ")
+            if return_menu == "quit":
+                menu()
+            option = input("Enter your option: ")  
+
+    elif option == "3":
+        print("Option 3 has been chosen.")
+        action = input("Display tickets or sort by status: (display/sort)")
+        if action == "display":
+            print(service_tickets)
+            return_menu = input("Type 'quit' to return to menu: ")
+            if return_menu == "quit":
+                menu()
+            option = input("Enter your option: ")
+        else:
+            if action == "sort":
+                action2 = input("Are you sorting by open or closed tickets? ")
+                if action2 == "open":
+                    if "open" in service_tickets:
+                        service_tickets.sorted("open")
+                print(service_tickets)
+                return_menu = input("Type 'quit' to return to menu: ")
+                if return_menu == "quit":
+                        menu()
+                option = input("Enter your option: ")
+                if action2 == "closed":
+                    if "closed" in service_tickets:
+                        service_tickets.sorted("closed")
+                print(service_tickets)
+                return_menu = input("Type 'quit' to return to menu: ")
+                if return_menu == "quit":
+                        menu()
+                option = input("Enter your option: ")
+
+    
